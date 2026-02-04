@@ -113,13 +113,14 @@ button:hover { transform: scale(1.1); }
   <h1 id="text">Hey Bagguu 👀</h1>
 
   <div id="gallery" class="gallery hidden">
-    <img src="https://raw.githubusercontent.com/jash9923/for-baggu/main/WhatsApp%20Image%202026-02-04%20at%202.19.39%20PM%20(1).jpeg">
-    <img src="https://raw.githubusercontent.com/jash9923/for-baggu/main/WhatsApp%20Image%202026-02-04%20at%202.19.39%20PM%20(2).jpeg">
-    <img src="https://raw.githubusercontent.com/jash9923/for-baggu/main/WhatsApp%20Image%202026-02-04%20at%202.19.39%20PM.jpeg">
-    <img src="https://raw.githubusercontent.com/jash9923/for-baggu/main/WhatsApp%20Image%202026-02-04%20at%202.19.40%20PM%20(1).jpeg">
-    <img src="https://raw.githubusercontent.com/jash9923/for-baggu/main/WhatsApp%20Image%202026-02-04%20at%202.19.40%20PM%20(2).jpeg">
-    <img src="https://raw.githubusercontent.com/jash9923/for-baggu/main/WhatsApp%20Image%202026-02-04%20at%202.19.40%20PM.jpeg">
-  </div>
+  <img src="https://raw.githubusercontent.com/jash9923/for-baggu/main/WhatsApp%20Image%202026-02-04%20at%202.19.39%20PM%20(1).jpeg" onclick="photoMsg(1)">
+  <img src="https://raw.githubusercontent.com/jash9923/for-baggu/main/WhatsApp%20Image%202026-02-04%20at%202.19.39%20PM%20(2).jpeg" onclick="photoMsg(2)">
+  <img src="https://raw.githubusercontent.com/jash9923/for-baggu/main/WhatsApp%20Image%202026-02-04%20at%202.19.39%20PM.jpeg" onclick="photoMsg(3)">
+  <img src="https://raw.githubusercontent.com/jash9923/for-baggu/main/WhatsApp%20Image%202026-02-04%20at%202.19.40%20PM%20(1).jpeg" onclick="photoMsg(4)">
+  <img src="https://raw.githubusercontent.com/jash9923/for-baggu/main/WhatsApp%20Image%202026-02-04%20at%202.19.40%20PM%20(2).jpeg" onclick="photoMsg(5)">
+  <img src="https://raw.githubusercontent.com/jash9923/for-baggu/main/WhatsApp%20Image%202026-02-04%20at%202.19.40%20PM.jpeg" onclick="photoMsg(6)">
+</div>
+
 
   <button id="nextBtn" onclick="next()">Click here</button>
 
@@ -191,7 +192,18 @@ function confettiRain(){
     setTimeout(()=>c.remove(),3000);
   }
 }
+function photoMsg(n) {
+  const msgs = {
+    1: "This smile still makes my heart skip 😭❤️",
+    2: "Our cutest moment together 🥺💫",
+    3: "You are my favorite view 😌🌸",
+    4: "This day was magical because of you ✨",
+    5: "Every picture of you is my favorite 💕",
+    6: "Forever us, always 😘"
+  };
 
+  alert(msgs[n]);
+}
 /* Floating hearts */
 setInterval(()=>{
   const h=document.createElement("div");

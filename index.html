@@ -228,4 +228,56 @@ function valOnly() {
   showFinal("I know you clicked ‘Only if you take me for sushi’ 😏🍣<br><br>SO we are going to have the best for US… THE BESTTT 💕🔥");
 }
 
-function showF
+function showFinal(msg) {
+  document.getElementById("finalBtns").classList.add("hidden");
+  document.getElementById("text").classList.add("hidden");
+  document.getElementById("gallery").classList.add("hidden");
+
+  document.getElementById("hiddenMsg").innerHTML =
+    "<h1>" + msg + "<br><br><button onclick='reply()'>Reply to me 💬</button></h1>";
+
+  document.getElementById("hiddenMsg").classList.remove("hidden");
+}
+
+function reply() {
+  window.open("https://wa.me/919727257013", "_blank");
+}
+
+function flip(card, n) {
+  const msgs = {
+    1: "This smile still makes my heart skip 💖",
+    2: "Our cutest memory ever 🥺",
+    3: "My favorite face 😌",
+    4: "This hug = home 🤍",
+    5: "Every moment with you is magic ✨",
+    6: "Forever us 💕"
+  };
+
+  card.classList.toggle("flip");
+  card.querySelector(".photo-back").innerText = msgs[n];
+
+  for (let i = 0; i < 8; i++) {
+    const s = document.createElement("div");
+    s.className = "sparkle";
+    s.style.left = Math.random() * 80 + "%";
+    s.style.top = Math.random() * 80 + "%";
+    card.appendChild(s);
+    setTimeout(() => s.remove(), 1000);
+  }
+}
+
+/* Floating hearts */
+setInterval(() => {
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "❤️";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.fontSize = (15 + Math.random() * 20) + "px";
+  document.body.appendChild(heart);
+  setTimeout(() => heart.remove(), 6000);
+}, 300);
+</script>
+
+</body>
+</html>
+

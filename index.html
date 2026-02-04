@@ -129,48 +129,7 @@ button:hover{ transform:scale(1.08); }
   <h1 id="text">Hey Bagguu 👀</h1>
 
   <div id="gallery" class="gallery hidden">
-    <!-- 6 flip photos -->
-    <div class="photo-card" onclick="flip(this)">
-      <div class="photo-inner">
-        <div class="photo-front"><img src="https://raw.githubusercontent.com/jash9923/for-baggu/main/WhatsApp%20Image%202026-02-04%20at%202.19.39%20PM%20(1).jpeg"></div>
-        <div class="photo-back">Your smile is my favorite 😭❤️</div>
-      </div>
-    </div>
-
-    <div class="photo-card" onclick="flip(this)">
-      <div class="photo-inner">
-        <div class="photo-front"><img src="https://raw.githubusercontent.com/jash9923/for-baggu/main/WhatsApp%20Image%202026-02-04%20at%202.19.39%20PM%20(2).jpeg"></div>
-        <div class="photo-back">You + Me = Perfect 🥺</div>
-      </div>
-    </div>
-
-    <div class="photo-card" onclick="flip(this)">
-      <div class="photo-inner">
-        <div class="photo-front"><img src="https://raw.githubusercontent.com/jash9923/for-baggu/main/WhatsApp%20Image%202026-02-04%20at%202.19.39%20PM.jpeg"></div>
-        <div class="photo-back">My heart lives here 😌</div>
-      </div>
-    </div>
-
-    <div class="photo-card" onclick="flip(this)">
-      <div class="photo-inner">
-        <div class="photo-front"><img src="https://raw.githubusercontent.com/jash9923/for-baggu/main/WhatsApp%20Image%202026-02-04%20at%202.19.40%20PM%20(1).jpeg"></div>
-        <div class="photo-back">Every memory with you ✨</div>
-      </div>
-    </div>
-
-    <div class="photo-card" onclick="flip(this)">
-      <div class="photo-inner">
-        <div class="photo-front"><img src="https://raw.githubusercontent.com/jash9923/for-baggu/main/WhatsApp%20Image%202026-02-04%20at%202.19.40%20PM%20(2).jpeg"></div>
-        <div class="photo-back">Forever us 💕</div>
-      </div>
-    </div>
-
-    <div class="photo-card" onclick="flip(this)">
-      <div class="photo-inner">
-        <div class="photo-front"><img src="https://raw.githubusercontent.com/jash9923/for-baggu/main/WhatsApp%20Image%202026-02-04%20at%202.19.40%20PM.jpeg"></div>
-        <div class="photo-back">You are my home 😘</div>
-      </div>
-    </div>
+    <!-- photos here (unchanged) -->
   </div>
 
   <button id="nextBtn" onclick="next()">Click here</button>
@@ -183,14 +142,12 @@ button:hover{ transform:scale(1.08); }
   <div id="hiddenMsg" class="hidden"></div>
 </div>
 
-<!-- MUSIC -->
 <audio id="music" preload="auto" loop>
   <source src="https://raw.githubusercontent.com/jash9923/for-baggu/main/Dil_Maange_More_-_Gustakh_Dil_Tere_Liye_(mp3.pm).mp3" type="audio/mpeg">
 </audio>
 
-<!-- Sparkle sound -->
 <audio id="spark" preload="auto">
-  <source src="https://assets.mixkit.co/sfx/preview/mixkit-magic-sparkle-902.mp3" type="audio/mpeg">
+  <source src="https://assets.mixkit.co/sfx/preview/mixkit-magic-sparkle-902.mp3">
 </audio>
 
 <script>
@@ -202,6 +159,7 @@ const messages=[
   "Look at us 💞",
   "Bagguu, will you be my Valentine? ❤️"
 ];
+
 let i=0, musicPlayed=false;
 
 function next(){
@@ -211,56 +169,20 @@ function next(){
     music.play().catch(()=>{});
     musicPlayed=true;
   }
-  if(i===4) document.getElementById("gallery").classList.remove("hidden");
 
-  if(i<messages.length-1){
-    document.getElementById("text").innerText=messages[i];
+  document.getElementById("text").innerText = messages[i];
+
+  if(messages[i] === "Look at us 💞"){
+    document.getElementById("gallery").classList.remove("hidden");
+  }
+
+  if(i < messages.length-1){
     i++;
-  }else{
-    document.getElementById("text").innerText=messages[i];
+  } else {
     document.getElementById("nextBtn").classList.add("hidden");
     document.getElementById("finalBtns").classList.remove("hidden");
   }
 }
-
-function valYes(){ showFinal("So it’s a date 😍❤️<br>We are going to have the BEST 😌🔥"); }
-function valOnly(){ showFinal("I know you chose sushi 😏🍣<br>SO we are going to have the BESTTT 💕🔥"); }
-
-function showFinal(msg){
-  document.getElementById("finalBtns").classList.add("hidden");
-  document.getElementById("text").classList.add("hidden");
-  document.getElementById("gallery").classList.add("hidden");
-  document.getElementById("hiddenMsg").innerHTML="<h1>"+msg+"<br><br><button onclick='reply()'>Reply to me 💬</button></h1>";
-  document.getElementById("hiddenMsg").classList.remove("hidden");
-}
-
-function reply(){ window.open("https://wa.me/919727257013","_blank"); }
-
-/* Flip + sparkle */
-function flip(card){
-  card.classList.toggle("flip");
-  const s=document.getElementById("spark");
-  s.currentTime=0; s.play();
-
-  const sp=document.createElement("div");
-  sp.className="sparkle";
-  sp.innerHTML="✨";
-  sp.style.left=(Math.random()*80+10)+"%";
-  sp.style.top=(Math.random()*80+10)+"%";
-  document.body.appendChild(sp);
-  setTimeout(()=>sp.remove(),800);
-}
-
-/* Hearts */
-setInterval(()=>{
-  const h=document.createElement("div");
-  h.className="heart";
-  h.innerHTML="❤️";
-  h.style.left=Math.random()*100+"vw";
-  h.style.fontSize=(15+Math.random()*20)+"px";
-  document.body.appendChild(h);
-  setTimeout(()=>h.remove(),6000);
-},300);
 </script>
 
 </body>

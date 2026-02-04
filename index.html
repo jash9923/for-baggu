@@ -5,124 +5,120 @@
 <title>For My Bagguu ❤️</title>
 
 <style>
-body {
-  margin: 0;
-  height: 100vh;
-  background: radial-gradient(circle at top, #2b0033, #0a0014);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: 'Segoe UI', sans-serif;
-  overflow: hidden;
-  color: #fff;
+body{
+  margin:0;
+  height:100vh;
+  background:
+    linear-gradient(rgba(20,0,30,0.65), rgba(20,0,30,0.85)),
+    url("https://raw.githubusercontent.com/jash9923/for-baggu/main/background%20imge.jpeg") center/cover no-repeat;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-family:Segoe UI,sans-serif;
+  overflow:hidden;
+  color:#fff;
+  text-align:center;
 }
 
-.card {
-  background: rgba(255,255,255,0.08);
-  padding: 30px 22px;
-  border-radius: 25px;
-  max-width: 360px;
-  box-shadow: 0 0 40px rgba(255,0,150,0.3);
-  text-align: center;
-  z-index: 2;
-  backdrop-filter: blur(8px);
+.card{
+  background:rgba(255,255,255,0.12);
+  padding:30px 22px;
+  border-radius:25px;
+  max-width:360px;
+  box-shadow:0 0 60px rgba(255,0,150,.6);
+  z-index:2;
 }
 
-h1 { font-size: 22px; line-height: 1.4; }
+h1{ font-size:22px; line-height:1.4; }
 
-button {
-  margin-top: 18px;
-  padding: 12px 24px;
-  border-radius: 25px;
-  border: none;
-  font-size: 15px;
-  cursor: pointer;
-  background: linear-gradient(135deg,#ff4f81,#ff85c2);
-  color: #fff;
-  transition: 0.3s;
+button{
+  margin-top:20px;
+  padding:12px 26px;
+  border-radius:30px;
+  border:none;
+  font-size:15px;
+  cursor:pointer;
+  background:#fff;
+  color:#ff4f81;
+  transition:.3s;
+}
+button:hover{ transform:scale(1.08); }
+
+.hidden{ display:none; }
+
+/* Gallery */
+.gallery{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+  margin-top:15px;
 }
 
-button:hover { transform: scale(1.08); }
+.photo-card{
+  perspective:1000px;
+  width:100%;
+  height:120px;
+}
+.photo-inner{
+  width:100%;
+  height:100%;
+  position:relative;
+  transform-style:preserve-3d;
+  transition:transform .7s ease;
+  will-change:transform;
+  transform:translateZ(0);
+}
+.photo-card.flip .photo-inner{ transform:rotateY(180deg); }
 
-.hidden { display: none; }
-
-/* GALLERY */
-.gallery { margin-top: 12px; }
-
-.photo-card {
-  width: 90px;
-  height: 110px;
-  perspective: 900px;
-  margin: 6px;
-  display: inline-block;
+.photo-front,.photo-back{
+  position:absolute;
+  width:100%;
+  height:100%;
+  backface-visibility:hidden;
+  border-radius:12px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  box-shadow:0 4px 10px rgba(0,0,0,.4);
 }
 
-.photo-inner {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  transform-style: preserve-3d;
-  transition: transform 0.7s ease;
-  cursor: pointer;
+.photo-front img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  border-radius:12px;
 }
 
-.photo-card.flip .photo-inner { transform: rotateY(180deg); }
-
-.photo-front, .photo-back {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  backface-visibility: hidden;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.4);
-}
-
-.photo-front img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.photo-back {
-  background: radial-gradient(circle,#ff9acb,#ff4f81);
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 11px;
-  padding: 8px;
-  transform: rotateY(180deg);
-  text-shadow: 0 0 6px rgba(255,255,255,0.9);
+.photo-back{
+  background:linear-gradient(135deg,#ff5fa2,#ff87c2);
+  transform:rotateY(180deg);
+  padding:6px;
+  font-size:13px;
 }
 
 /* Sparkles */
-.sparkle {
-  position: absolute;
-  width: 6px;
-  height: 6px;
-  background: white;
-  border-radius: 50%;
-  animation: sparkle 1s ease-out forwards;
+.sparkle{
+  position:absolute;
+  color:#fff;
+  animation:spark .8s ease-out forwards;
+  pointer-events:none;
+}
+@keyframes spark{
+  from{transform:scale(0);opacity:1;}
+  to{transform:scale(2);opacity:0;}
 }
 
-@keyframes sparkle {
-  from { transform: scale(0); opacity: 1; }
-  to { transform: scale(2) translateY(-20px); opacity: 0; }
+/* Hearts */
+.heart{
+  position:absolute;
+  bottom:-20px;
+  color:rgba(255,255,255,.8);
+  font-size:20px;
+  animation:float 6s linear infinite;
 }
-
-/* Floating hearts */
-.heart {
-  position: absolute;
-  bottom: -20px;
-  color: rgba(255,255,255,0.8);
-  font-size: 20px;
-  animation: float 6s linear infinite;
-}
-
-@keyframes float {
-  0% { transform: translateY(0); opacity: 1; }
-  100% { transform: translateY(-100vh); opacity: 0; }
+@keyframes float{
+  0%{transform:translateY(0);opacity:1;}
+  100%{transform:translateY(-100vh);opacity:0;}
 }
 </style>
 </head>
@@ -133,45 +129,46 @@ button:hover { transform: scale(1.08); }
   <h1 id="text">Hey Bagguu 👀</h1>
 
   <div id="gallery" class="gallery hidden">
-    <div class="photo-card" onclick="flip(this,1)">
+    <!-- 6 flip photos -->
+    <div class="photo-card" onclick="flip(this)">
       <div class="photo-inner">
         <div class="photo-front"><img src="https://raw.githubusercontent.com/jash9923/for-baggu/main/WhatsApp%20Image%202026-02-04%20at%202.19.39%20PM%20(1).jpeg"></div>
-        <div class="photo-back"></div>
+        <div class="photo-back">Your smile is my favorite 😭❤️</div>
       </div>
     </div>
 
-    <div class="photo-card" onclick="flip(this,2)">
+    <div class="photo-card" onclick="flip(this)">
       <div class="photo-inner">
         <div class="photo-front"><img src="https://raw.githubusercontent.com/jash9923/for-baggu/main/WhatsApp%20Image%202026-02-04%20at%202.19.39%20PM%20(2).jpeg"></div>
-        <div class="photo-back"></div>
+        <div class="photo-back">You + Me = Perfect 🥺</div>
       </div>
     </div>
 
-    <div class="photo-card" onclick="flip(this,3)">
+    <div class="photo-card" onclick="flip(this)">
       <div class="photo-inner">
         <div class="photo-front"><img src="https://raw.githubusercontent.com/jash9923/for-baggu/main/WhatsApp%20Image%202026-02-04%20at%202.19.39%20PM.jpeg"></div>
-        <div class="photo-back"></div>
+        <div class="photo-back">My heart lives here 😌</div>
       </div>
     </div>
 
-    <div class="photo-card" onclick="flip(this,4)">
+    <div class="photo-card" onclick="flip(this)">
       <div class="photo-inner">
         <div class="photo-front"><img src="https://raw.githubusercontent.com/jash9923/for-baggu/main/WhatsApp%20Image%202026-02-04%20at%202.19.40%20PM%20(1).jpeg"></div>
-        <div class="photo-back"></div>
+        <div class="photo-back">Every memory with you ✨</div>
       </div>
     </div>
 
-    <div class="photo-card" onclick="flip(this,5)">
+    <div class="photo-card" onclick="flip(this)">
       <div class="photo-inner">
         <div class="photo-front"><img src="https://raw.githubusercontent.com/jash9923/for-baggu/main/WhatsApp%20Image%202026-02-04%20at%202.19.40%20PM%20(2).jpeg"></div>
-        <div class="photo-back"></div>
+        <div class="photo-back">Forever us 💕</div>
       </div>
     </div>
 
-    <div class="photo-card" onclick="flip(this,6)">
+    <div class="photo-card" onclick="flip(this)">
       <div class="photo-inner">
         <div class="photo-front"><img src="https://raw.githubusercontent.com/jash9923/for-baggu/main/WhatsApp%20Image%202026-02-04%20at%202.19.40%20PM.jpeg"></div>
-        <div class="photo-back"></div>
+        <div class="photo-back">You are my home 😘</div>
       </div>
     </div>
   </div>
@@ -180,104 +177,91 @@ button:hover { transform: scale(1.08); }
 
   <div id="finalBtns" class="hidden">
     <button onclick="valYes()">Hell Yess 😍</button>
-    <button onclick="valOnly()">Only if you take me for sushi 🍣</button>
+    <button onclick="valOnly()">Only if sushi 🍣</button>
   </div>
 
   <div id="hiddenMsg" class="hidden"></div>
 </div>
 
-<audio id="music" loop>
-  <source src="https://pagalworld.com.se/files/download/id/6470" type="audio/mpeg">
+<!-- MUSIC -->
+<audio id="music" preload="auto" loop>
+  <source src="https://raw.githubusercontent.com/jash9923/for-baggu/main/Dil_Maange_More_-_Gustakh_Dil_Tere_Liye_(mp3.pm).mp3" type="audio/mpeg">
+</audio>
+
+<!-- Sparkle sound -->
+<audio id="spark" preload="auto">
+  <source src="https://assets.mixkit.co/sfx/preview/mixkit-magic-sparkle-902.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-const messages = [
+const messages=[
   "I made something just for you 💕",
   "Because you mean more to me than you know",
-  "You are my safe place, my comfort",
-  "And my favorite person 🥺",
+  "You are my safe place",
+  "My favorite person 🥺",
   "Look at us 💞",
   "Bagguu, will you be my Valentine? ❤️"
 ];
+let i=0, musicPlayed=false;
 
-let i = 0, musicPlayed = false;
-
-function next() {
-  if (!musicPlayed) {
-    document.getElementById("music").play();
-    musicPlayed = true;
+function next(){
+  const music=document.getElementById("music");
+  if(!musicPlayed){
+    music.volume=0.4;
+    music.play().catch(()=>{});
+    musicPlayed=true;
   }
+  if(i===4) document.getElementById("gallery").classList.remove("hidden");
 
-  if (i === 4) document.getElementById("gallery").classList.remove("hidden");
-
-  if (i < messages.length - 1) {
-    document.getElementById("text").innerText = messages[i];
+  if(i<messages.length-1){
+    document.getElementById("text").innerText=messages[i];
     i++;
-  } else {
-    document.getElementById("text").innerText = messages[i];
+  }else{
+    document.getElementById("text").innerText=messages[i];
     document.getElementById("nextBtn").classList.add("hidden");
     document.getElementById("finalBtns").classList.remove("hidden");
   }
 }
 
-function valYes() {
-  showFinal("So it’s a date 😍❤️<br><br>We are going to have the BEST for us 😌🔥");
-}
+function valYes(){ showFinal("So it’s a date 😍❤️<br>We are going to have the BEST 😌🔥"); }
+function valOnly(){ showFinal("I know you chose sushi 😏🍣<br>SO we are going to have the BESTTT 💕🔥"); }
 
-function valOnly() {
-  showFinal("I know you clicked ‘Only if you take me for sushi’ 😏🍣<br><br>SO we are going to have the best for US… THE BESTTT 💕🔥");
-}
-
-function showFinal(msg) {
+function showFinal(msg){
   document.getElementById("finalBtns").classList.add("hidden");
   document.getElementById("text").classList.add("hidden");
   document.getElementById("gallery").classList.add("hidden");
-
-  document.getElementById("hiddenMsg").innerHTML =
-    "<h1>" + msg + "<br><br><button onclick='reply()'>Reply to me 💬</button></h1>";
-
+  document.getElementById("hiddenMsg").innerHTML="<h1>"+msg+"<br><br><button onclick='reply()'>Reply to me 💬</button></h1>";
   document.getElementById("hiddenMsg").classList.remove("hidden");
 }
 
-function reply() {
-  window.open("https://wa.me/919727257013", "_blank");
-}
+function reply(){ window.open("https://wa.me/919727257013","_blank"); }
 
-function flip(card, n) {
-  const msgs = {
-    1: "This smile still makes my heart skip 💖",
-    2: "Our cutest memory ever 🥺",
-    3: "My favorite face 😌",
-    4: "This hug = home 🤍",
-    5: "Every moment with you is magic ✨",
-    6: "Forever us 💕"
-  };
-
+/* Flip + sparkle */
+function flip(card){
   card.classList.toggle("flip");
-  card.querySelector(".photo-back").innerText = msgs[n];
+  const s=document.getElementById("spark");
+  s.currentTime=0; s.play();
 
-  for (let i = 0; i < 8; i++) {
-    const s = document.createElement("div");
-    s.className = "sparkle";
-    s.style.left = Math.random() * 80 + "%";
-    s.style.top = Math.random() * 80 + "%";
-    card.appendChild(s);
-    setTimeout(() => s.remove(), 1000);
-  }
+  const sp=document.createElement("div");
+  sp.className="sparkle";
+  sp.innerHTML="✨";
+  sp.style.left=(Math.random()*80+10)+"%";
+  sp.style.top=(Math.random()*80+10)+"%";
+  document.body.appendChild(sp);
+  setTimeout(()=>sp.remove(),800);
 }
 
-/* Floating hearts */
-setInterval(() => {
-  const heart = document.createElement("div");
-  heart.className = "heart";
-  heart.innerHTML = "❤️";
-  heart.style.left = Math.random() * 100 + "vw";
-  heart.style.fontSize = (15 + Math.random() * 20) + "px";
-  document.body.appendChild(heart);
-  setTimeout(() => heart.remove(), 6000);
-}, 300);
+/* Hearts */
+setInterval(()=>{
+  const h=document.createElement("div");
+  h.className="heart";
+  h.innerHTML="❤️";
+  h.style.left=Math.random()*100+"vw";
+  h.style.fontSize=(15+Math.random()*20)+"px";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),6000);
+},300);
 </script>
 
 </body>
 </html>
-

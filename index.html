@@ -8,119 +8,173 @@
 body {
   margin: 0;
   height: 100vh;
-  background: linear-gradient(135deg, #12002f, #2b0033, #ff4f81);
+  background: radial-gradient(circle at top, #2b0033, #0a0014);
   display: flex;
   justify-content: center;
   align-items: center;
   font-family: 'Segoe UI', sans-serif;
   overflow: hidden;
   color: #fff;
-  text-align: center;
 }
 
 .card {
-  background: rgba(255,255,255,0.12);
-  padding: 40px 30px;
-  border-radius: 30px;
+  background: rgba(255,255,255,0.08);
+  padding: 30px 22px;
+  border-radius: 25px;
   max-width: 360px;
-  box-shadow: 0 0 35px rgba(255,79,129,0.6);
-  backdrop-filter: blur(10px);
-  animation: glow 3s infinite alternate;
+  box-shadow: 0 0 40px rgba(255,0,150,0.3);
+  text-align: center;
   z-index: 2;
+  backdrop-filter: blur(8px);
 }
 
-@keyframes glow {
-  from { box-shadow: 0 0 20px rgba(255,79,129,0.3); }
-  to { box-shadow: 0 0 45px rgba(255,79,129,0.9); }
-}
-
-h1 {
-  font-size: 22px;
-  line-height: 1.4;
-}
+h1 { font-size: 22px; line-height: 1.4; }
 
 button {
   margin-top: 18px;
-  padding: 12px 26px;
-  border-radius: 30px;
+  padding: 12px 24px;
+  border-radius: 25px;
   border: none;
-  font-size: 16px;
+  font-size: 15px;
   cursor: pointer;
-  background: linear-gradient(135deg,#ff7eb3,#ff4f81);
+  background: linear-gradient(135deg,#ff4f81,#ff85c2);
   color: #fff;
   transition: 0.3s;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.4);
 }
 
-button:hover { transform: scale(1.1); }
+button:hover { transform: scale(1.08); }
 
 .hidden { display: none; }
 
-/* Gallery */
-.gallery img {
+/* GALLERY */
+.gallery { margin-top: 12px; }
+
+.photo-card {
   width: 90px;
   height: 110px;
-  object-fit: cover;
-  border-radius: 14px;
+  perspective: 900px;
   margin: 6px;
-  box-shadow: 0 6px 15px rgba(0,0,0,0.4);
-  animation: pop 0.7s ease;
+  display: inline-block;
 }
 
-@keyframes pop {
-  from { transform: scale(0) rotate(-10deg); opacity: 0; }
-  to { transform: scale(1) rotate(0); opacity: 1; }
+.photo-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.7s ease;
+  cursor: pointer;
 }
 
-/* Hearts */
+.photo-card.flip .photo-inner { transform: rotateY(180deg); }
+
+.photo-front, .photo-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+}
+
+.photo-front img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.photo-back {
+  background: radial-gradient(circle,#ff9acb,#ff4f81);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  padding: 8px;
+  transform: rotateY(180deg);
+  text-shadow: 0 0 6px rgba(255,255,255,0.9);
+}
+
+/* Sparkles */
+.sparkle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: white;
+  border-radius: 50%;
+  animation: sparkle 1s ease-out forwards;
+}
+
+@keyframes sparkle {
+  from { transform: scale(0); opacity: 1; }
+  to { transform: scale(2) translateY(-20px); opacity: 0; }
+}
+
+/* Floating hearts */
 .heart {
   position: absolute;
   bottom: -20px;
+  color: rgba(255,255,255,0.8);
   font-size: 20px;
   animation: float 6s linear infinite;
 }
+
 @keyframes float {
-  to { transform: translateY(-100vh); opacity: 0; }
-}
-
-/* Confetti */
-.confetti {
-  position: absolute;
-  top: -10px;
-  font-size: 18px;
-  animation: fall 3s linear forwards;
-}
-@keyframes fall {
-  to { transform: translateY(110vh) rotate(360deg); opacity: 0; }
-}
-
-/* Heartbeat */
-.heartbeat {
-  animation: beat 1s infinite;
-}
-@keyframes beat {
-  0%,100% { transform: scale(1); }
-  25% { transform: scale(1.1); }
-  50% { transform: scale(1); }
-  75% { transform: scale(1.15); }
+  0% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(-100vh); opacity: 0; }
 }
 </style>
 </head>
 
 <body>
 
-<div class="card" id="card">
+<div class="card">
   <h1 id="text">Hey Bagguu 👀</h1>
 
   <div id="gallery" class="gallery hidden">
-  <img src="https://raw.githubusercontent.com/jash9923/for-baggu/main/WhatsApp%20Image%202026-02-04%20at%202.19.39%20PM%20(1).jpeg" onclick="photoMsg(1)">
-  <img src="https://raw.githubusercontent.com/jash9923/for-baggu/main/WhatsApp%20Image%202026-02-04%20at%202.19.39%20PM%20(2).jpeg" onclick="photoMsg(2)">
-  <img src="https://raw.githubusercontent.com/jash9923/for-baggu/main/WhatsApp%20Image%202026-02-04%20at%202.19.39%20PM.jpeg" onclick="photoMsg(3)">
-  <img src="https://raw.githubusercontent.com/jash9923/for-baggu/main/WhatsApp%20Image%202026-02-04%20at%202.19.40%20PM%20(1).jpeg" onclick="photoMsg(4)">
-  <img src="https://raw.githubusercontent.com/jash9923/for-baggu/main/WhatsApp%20Image%202026-02-04%20at%202.19.40%20PM%20(2).jpeg" onclick="photoMsg(5)">
-  <img src="https://raw.githubusercontent.com/jash9923/for-baggu/main/WhatsApp%20Image%202026-02-04%20at%202.19.40%20PM.jpeg" onclick="photoMsg(6)">
-</div>
+    <div class="photo-card" onclick="flip(this,1)">
+      <div class="photo-inner">
+        <div class="photo-front"><img src="https://raw.githubusercontent.com/jash9923/for-baggu/main/WhatsApp%20Image%202026-02-04%20at%202.19.39%20PM%20(1).jpeg"></div>
+        <div class="photo-back"></div>
+      </div>
+    </div>
 
+    <div class="photo-card" onclick="flip(this,2)">
+      <div class="photo-inner">
+        <div class="photo-front"><img src="https://raw.githubusercontent.com/jash9923/for-baggu/main/WhatsApp%20Image%202026-02-04%20at%202.19.39%20PM%20(2).jpeg"></div>
+        <div class="photo-back"></div>
+      </div>
+    </div>
+
+    <div class="photo-card" onclick="flip(this,3)">
+      <div class="photo-inner">
+        <div class="photo-front"><img src="https://raw.githubusercontent.com/jash9923/for-baggu/main/WhatsApp%20Image%202026-02-04%20at%202.19.39%20PM.jpeg"></div>
+        <div class="photo-back"></div>
+      </div>
+    </div>
+
+    <div class="photo-card" onclick="flip(this,4)">
+      <div class="photo-inner">
+        <div class="photo-front"><img src="https://raw.githubusercontent.com/jash9923/for-baggu/main/WhatsApp%20Image%202026-02-04%20at%202.19.40%20PM%20(1).jpeg"></div>
+        <div class="photo-back"></div>
+      </div>
+    </div>
+
+    <div class="photo-card" onclick="flip(this,5)">
+      <div class="photo-inner">
+        <div class="photo-front"><img src="https://raw.githubusercontent.com/jash9923/for-baggu/main/WhatsApp%20Image%202026-02-04%20at%202.19.40%20PM%20(2).jpeg"></div>
+        <div class="photo-back"></div>
+      </div>
+    </div>
+
+    <div class="photo-card" onclick="flip(this,6)">
+      <div class="photo-inner">
+        <div class="photo-front"><img src="https://raw.githubusercontent.com/jash9923/for-baggu/main/WhatsApp%20Image%202026-02-04%20at%202.19.40%20PM.jpeg"></div>
+        <div class="photo-back"></div>
+      </div>
+    </div>
+  </div>
 
   <button id="nextBtn" onclick="next()">Click here</button>
 
@@ -132,7 +186,7 @@ button:hover { transform: scale(1.1); }
   <div id="hiddenMsg" class="hidden"></div>
 </div>
 
-<audio id="music">
+<audio id="music" loop>
   <source src="https://pagalworld.com.se/files/download/id/6470" type="audio/mpeg">
 </audio>
 
@@ -146,75 +200,32 @@ const messages = [
   "Bagguu, will you be my Valentine? ❤️"
 ];
 
-let i = 0, musicPlayed=false;
+let i = 0, musicPlayed = false;
 
-function next(){
-  if(!musicPlayed){ music.play(); musicPlayed=true; }
-  if(i===4) gallery.classList.remove("hidden");
-  if(i<messages.length-1){ text.innerText=messages[i++]; }
-  else{
-    text.innerText=messages[i];
-    nextBtn.classList.add("hidden");
-    finalBtns.classList.remove("hidden");
+function next() {
+  if (!musicPlayed) {
+    document.getElementById("music").play();
+    musicPlayed = true;
+  }
+
+  if (i === 4) document.getElementById("gallery").classList.remove("hidden");
+
+  if (i < messages.length - 1) {
+    document.getElementById("text").innerText = messages[i];
+    i++;
+  } else {
+    document.getElementById("text").innerText = messages[i];
+    document.getElementById("nextBtn").classList.add("hidden");
+    document.getElementById("finalBtns").classList.remove("hidden");
   }
 }
 
-function valYes(){
-  confettiRain();
+function valYes() {
   showFinal("So it’s a date 😍❤️<br><br>We are going to have the BEST for us 😌🔥");
 }
 
-function valOnly(){
-  card.classList.add("heartbeat");
-  showFinal("I know you clicked ‘Only if you take me to get best sushi & good food’ 😏🍣<br><br>SO we are going to have the best for US… THE BESTTT 💕🔥");
+function valOnly() {
+  showFinal("I know you clicked ‘Only if you take me for sushi’ 😏🍣<br><br>SO we are going to have the best for US… THE BESTTT 💕🔥");
 }
 
-function showFinal(msg){
-  finalBtns.classList.add("hidden");
-  text.classList.add("hidden");
-  gallery.classList.add("hidden");
-  hiddenMsg.innerHTML="<h1>"+msg+"<br><br><button onclick='reply()'>Reply to me 💬</button></h1>";
-  hiddenMsg.classList.remove("hidden");
-}
-
-function reply(){
-  window.open("https://wa.me/919727257013","_blank");
-}
-
-/* Confetti */
-function confettiRain(){
-  for(let i=0;i<40;i++){
-    const c=document.createElement("div");
-    c.className="confetti";
-    c.innerHTML=["🎉","✨","💖","💫"][Math.floor(Math.random()*4)];
-    c.style.left=Math.random()*100+"vw";
-    document.body.appendChild(c);
-    setTimeout(()=>c.remove(),3000);
-  }
-}
-function photoMsg(n) {
-  const msgs = {
-    1: "This smile still makes my heart skip 😭❤️",
-    2: "Our cutest moment together 🥺💫",
-    3: "You are my favorite view 😌🌸",
-    4: "This day was magical because of you ✨",
-    5: "Every picture of you is my favorite 💕",
-    6: "Forever us, always 😘"
-  };
-
-  alert(msgs[n]);
-}
-/* Floating hearts */
-setInterval(()=>{
-  const h=document.createElement("div");
-  h.className="heart";
-  h.innerHTML="❤️";
-  h.style.left=Math.random()*100+"vw";
-  h.style.fontSize=(15+Math.random()*20)+"px";
-  document.body.appendChild(h);
-  setTimeout(()=>h.remove(),6000);
-},300);
-</script>
-
-</body>
-</html>
+function showF

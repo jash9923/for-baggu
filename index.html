@@ -91,35 +91,23 @@ button:hover {
 <div class="card">
   <h1 id="text">Hey Bagguu 👀</h1>
 
-<div id="gallery" class="gallery hidden">
-  <img src="https://raw.githubusercontent.com/jash9923/for-baggu/main/WhatsApp%20Image%202026-02-04%20at%202.19.39%20PM%20(1).jpeg">
-  <img src="https://raw.githubusercontent.com/jash9923/for-baggu/main/WhatsApp%20Image%202026-02-04%20at%202.19.39%20PM%20(2).jpeg">
-  <img src="https://raw.githubusercontent.com/jash9923/for-baggu/main/WhatsApp%20Image%202026-02-04%20at%202.19.39%20PM.jpeg">
-  <img src="https://raw.githubusercontent.com/jash9923/for-baggu/main/WhatsApp%20Image%202026-02-04%20at%202.19.40%20PM%20(1).jpeg">
-  <img src="https://raw.githubusercontent.com/jash9923/for-baggu/main/WhatsApp%20Image%202026-02-04%20at%202.19.40%20PM%20(2).jpeg">
-  <img src="https://raw.githubusercontent.com/jash9923/for-baggu/main/WhatsApp%20Image%202026-02-04%20at%202.19.40%20PM.jpeg">
-</div>
-
+  <div id="gallery" class="gallery hidden">
+    <img src="https://raw.githubusercontent.com/jash9923/for-baggu/main/WhatsApp%20Image%202026-02-04%20at%202.19.39%20PM%20(1).jpeg">
+    <img src="https://raw.githubusercontent.com/jash9923/for-baggu/main/WhatsApp%20Image%202026-02-04%20at%202.19.39%20PM%20(2).jpeg">
+    <img src="https://raw.githubusercontent.com/jash9923/for-baggu/main/WhatsApp%20Image%202026-02-04%20at%202.19.39%20PM.jpeg">
+    <img src="https://raw.githubusercontent.com/jash9923/for-baggu/main/WhatsApp%20Image%202026-02-04%20at%202.19.40%20PM%20(1).jpeg">
+    <img src="https://raw.githubusercontent.com/jash9923/for-baggu/main/WhatsApp%20Image%202026-02-04%20at%202.19.40%20PM%20(2).jpeg">
+    <img src="https://raw.githubusercontent.com/jash9923/for-baggu/main/WhatsApp%20Image%202026-02-04%20at%202.19.40%20PM.jpeg">
+  </div>
 
   <button id="nextBtn" onclick="next()">Click here</button>
 
- <div id="finalBtns" class="hidden">
-  <button onclick="valYes()">Hell Yess 😍</button>
-  <button onclick="valOnly()">Only if you take me for sushi 🍣</button>
-</div>
-  <div id="hiddenMsg" class="hidden">
-    <h1>
-      It’s a date 🥺❤️<br><br>
-      our date is ..<br>
-      for the best sushi 🍣<br>
-      and best of me 💫<br><br>
-      Always yours,<br>
-Ishani 💕<br><br>
-Get ready, hot, for the dinner…<br>
-and for me too 😉🔥<br><br>
-<button onclick="reply()">Reply to me 💬</button>
-    </h1>
+  <div id="finalBtns" class="hidden">
+    <button onclick="valYes()">Hell Yess 😍</button>
+    <button onclick="valOnly()">Only if you take me for sushi 🍣</button>
   </div>
+
+  <div id="hiddenMsg" class="hidden"></div>
 </div>
 
 <audio id="music">
@@ -167,14 +155,6 @@ function valOnly() {
   showFinal("I know you clicked ‘Only if you take me to get best sushi & good food’ 😏🍣<br><br>SO we are going to have the best for US… THE BESTTT 💕🔥");
 }
 
-function valYes() {
-  showFinal("So it’s a date 😍❤️<br><br>We are going to have the BEST for us 😌🔥");
-}
-
-function valOnly() {
-  showFinal("I know you clicked ‘Only if you take me for sushi’ 😏🍣<br><br>SO we are going to have the best for US… THE BESTTT 💕🔥");
-}
-
 function showFinal(msg) {
   document.getElementById("finalBtns").classList.add("hidden");
   document.getElementById("text").classList.add("hidden");
@@ -190,10 +170,7 @@ function showFinal(msg) {
 function reply() {
   window.open("https://wa.me/919727257013", "_blank");
 }
-}
-function reply() {
-  window.open("https://wa.me/919727257013", "_blank");
-}
+
 /* Floating hearts */
 setInterval(() => {
   const heart = document.createElement("div");
@@ -205,6 +182,6 @@ setInterval(() => {
   setTimeout(() => heart.remove(), 6000);
 }, 300);
 </script>
-  
+
 </body>
 </html>

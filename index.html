@@ -17,6 +17,7 @@ body {
   color: #fff;
 }
 
+/* CARD */
 .card {
   background: rgba(255,255,255,0.08);
   padding: 30px 22px;
@@ -43,7 +44,6 @@ button {
 }
 
 button:hover { transform: scale(1.08); }
-
 .hidden { display: none; }
 
 /* GALLERY */
@@ -124,6 +124,30 @@ button:hover { transform: scale(1.08); }
   0% { transform: translateY(0); opacity: 1; }
   100% { transform: translateY(-100vh); opacity: 0; }
 }
+
+/* Rain */
+.rain {
+  position: absolute;
+  width: 2px;
+  height: 15px;
+  background: rgba(255,255,255,0.4);
+  animation: fall 0.7s linear infinite;
+}
+
+@keyframes fall {
+  from { transform: translateY(-100vh); }
+  to { transform: translateY(100vh); }
+}
+
+/* Lightning */
+.flash {
+  animation: flash 2s infinite;
+}
+
+@keyframes flash {
+  0%, 90%, 100% { background: radial-gradient(circle at top, #2b0033, #0a0014); }
+  95% { background: #fff; }
+}
 </style>
 </head>
 
@@ -190,6 +214,14 @@ button:hover { transform: scale(1.08); }
   <source src="https://pagalworld.com.se/files/download/id/6470" type="audio/mpeg">
 </audio>
 
+<audio id="heartbeat">
+  <source src="https://www.soundjay.com/human/heartbeat-01a.mp3" type="audio/mpeg">
+</audio>
+
+<audio id="rainSound">
+  <source src="https://www.soundjay.com/nature/rain-01.mp3" type="audio/mpeg">
+</audio>
+
 <script>
 const messages = [
   "I made something just for you 💕",
@@ -221,22 +253,40 @@ function next() {
 }
 
 function valYes() {
-  showFinal("So it’s a date 😍❤️<br><br>We are going to have the BEST for us 😌🔥");
+  document.getElementById("heartbeat").play();
+  typeFinal("So it’s a date 😍❤️\n\nMy heart is beating just for you 💓");
 }
 
 function valOnly() {
-  showFinal("I know you clicked ‘Only if you take me for sushi’ 😏🍣<br><br>SO we are going to have the best for US… THE BESTTT 💕🔥");
+  document.getElementById("rainSound").play();
+  document.body.classList.add("flash");
+
+  for (let i = 0; i < 80; i++) {
+    const drop = document.createElement("div");
+    drop.className = "rain";
+    drop.style.left = Math.random() * 100 + "vw";
+    drop.style.animationDuration = (0.5 + Math.random()) + "s";
+    document.body.appendChild(drop);
+  }
+
+  typeFinal("I know you clicked Only if sushi 😏🍣\n\nSo we are going to have THE BESTTT for us 💕🔥");
 }
 
-function showFinal(msg) {
+function typeFinal(text) {
   document.getElementById("finalBtns").classList.add("hidden");
   document.getElementById("text").classList.add("hidden");
   document.getElementById("gallery").classList.add("hidden");
 
-  document.getElementById("hiddenMsg").innerHTML =
-    "<h1>" + msg + "<br><br><button onclick='reply()'>Reply to me 💬</button></h1>";
+  const box = document.getElementById("hiddenMsg");
+  box.classList.remove("hidden");
+  box.innerHTML = "<h1 id='typeBox'></h1><br><button onclick='reply()'>Reply to me 💬</button>";
 
-  document.getElementById("hiddenMsg").classList.remove("hidden");
+  let idx = 0;
+  const interval = setInterval(() => {
+    document.getElementById("typeBox").innerText += text[idx];
+    idx++;
+    if (idx >= text.length) clearInterval(interval);
+  }, 50);
 }
 
 function reply() {
@@ -280,4 +330,3 @@ setInterval(() => {
 
 </body>
 </html>
-

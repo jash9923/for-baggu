@@ -8,8 +8,8 @@
 body {
   margin: 0;
   height: 100vh;
-  background:
-    linear-gradient(rgba(20,0,40,.7),rgba(20,0,40,.7)),
+  background
+  linear-gradient(rgba(20,0,40,.7),rgba(20,0,40,.7)),
     url("https://raw.githubusercontent.com/jash9923/for-baggu/main/background%20imge.jpeg")
     center/cover no-repeat;
   display: flex;
@@ -18,10 +18,9 @@ body {
   font-family: 'Segoe UI', sans-serif;
   overflow: hidden;
   color: #fff;
-  word-break: break-word;
 }
 
-/* Card */
+/* CARD */
 .card {
   background: rgba(255,255,255,0.08);
   padding: 30px 22px;
@@ -33,7 +32,7 @@ body {
   backdrop-filter: blur(8px);
 }
 
-h1 { font-size: 22px; line-height: 1.5; }
+h1 { font-size: 22px; line-height: 1.4; }
 
 button {
   margin-top: 18px;
@@ -46,8 +45,8 @@ button {
   color: #fff;
   transition: 0.3s;
 }
-button:hover { transform: scale(1.08); }
 
+button:hover { transform: scale(1.08); }
 .hidden { display: none; }
 
 /* GALLERY */
@@ -109,6 +108,7 @@ button:hover { transform: scale(1.08); }
   border-radius: 50%;
   animation: sparkle 1s ease-out forwards;
 }
+
 @keyframes sparkle {
   from { transform: scale(0); opacity: 1; }
   to { transform: scale(2) translateY(-20px); opacity: 0; }
@@ -122,9 +122,34 @@ button:hover { transform: scale(1.08); }
   font-size: 20px;
   animation: float 6s linear infinite;
 }
+
 @keyframes float {
   0% { transform: translateY(0); opacity: 1; }
   100% { transform: translateY(-100vh); opacity: 0; }
+}
+
+/* Rain */
+.rain {
+  position: absolute;
+  width: 2px;
+  height: 15px;
+  background: rgba(255,255,255,0.4);
+  animation: fall 0.7s linear infinite;
+}
+
+@keyframes fall {
+  from { transform: translateY(-100vh); }
+  to { transform: translateY(100vh); }
+}
+
+/* Lightning */
+.flash {
+  animation: flash 2s infinite;
+}
+
+@keyframes flash {
+  0%, 90%, 100% { background: radial-gradient(circle at top, #2b0033, #0a0014); }
+  95% { background: #fff; }
 }
 </style>
 </head>
@@ -135,10 +160,47 @@ button:hover { transform: scale(1.08); }
   <h1 id="text">Hey Bagguu 👀</h1>
 
   <div id="gallery" class="gallery hidden">
-    <!-- your 6 photos SAME -->
-    <!-- (I kept them exactly) -->
-    <!-- no deletion -->
-    <!-- ... -->
+    <div class="photo-card" onclick="flip(this,1)">
+      <div class="photo-inner">
+        <div class="photo-front"><img src="https://raw.githubusercontent.com/jash9923/for-baggu/main/WhatsApp%20Image%202026-02-04%20at%202.19.39%20PM%20(1).jpeg"></div>
+        <div class="photo-back"></div>
+      </div>
+    </div>
+
+    <div class="photo-card" onclick="flip(this,2)">
+      <div class="photo-inner">
+        <div class="photo-front"><img src="https://raw.githubusercontent.com/jash9923/for-baggu/main/WhatsApp%20Image%202026-02-04%20at%202.19.39%20PM%20(2).jpeg"></div>
+        <div class="photo-back"></div>
+      </div>
+    </div>
+
+    <div class="photo-card" onclick="flip(this,3)">
+      <div class="photo-inner">
+        <div class="photo-front"><img src="https://raw.githubusercontent.com/jash9923/for-baggu/main/WhatsApp%20Image%202026-02-04%20at%202.19.39%20PM.jpeg"></div>
+        <div class="photo-back"></div>
+      </div>
+    </div>
+
+    <div class="photo-card" onclick="flip(this,4)">
+      <div class="photo-inner">
+        <div class="photo-front"><img src="https://raw.githubusercontent.com/jash9923/for-baggu/main/WhatsApp%20Image%202026-02-04%20at%202.19.40%20PM%20(1).jpeg"></div>
+        <div class="photo-back"></div>
+      </div>
+    </div>
+
+    <div class="photo-card" onclick="flip(this,5)">
+      <div class="photo-inner">
+        <div class="photo-front"><img src="https://raw.githubusercontent.com/jash9923/for-baggu/main/WhatsApp%20Image%202026-02-04%20at%202.19.40%20PM%20(2).jpeg"></div>
+        <div class="photo-back"></div>
+      </div>
+    </div>
+
+    <div class="photo-card" onclick="flip(this,6)">
+      <div class="photo-inner">
+        <div class="photo-front"><img src="https://raw.githubusercontent.com/jash9923/for-baggu/main/WhatsApp%20Image%202026-02-04%20at%202.19.40%20PM.jpeg"></div>
+        <div class="photo-back"></div>
+      </div>
+    </div>
   </div>
 
   <button id="nextBtn" onclick="next()">Click here</button>
@@ -152,7 +214,15 @@ button:hover { transform: scale(1.08); }
 </div>
 
 <audio id="music" loop>
-  <source src="https://raw.githubusercontent.com/jash9923/for-baggu/main/Dil_Maange_More_-_Gustakh_Dil_Tere_Liye_(mp3.pm).mp3" type="audio/mpeg">
+  <source src="https://pagalworld.com.se/files/download/id/6470" type="audio/mpeg">
+</audio>
+
+<audio id="heartbeat">
+  <source src="https://www.soundjay.com/human/heartbeat-01a.mp3" type="audio/mpeg">
+</audio>
+
+<audio id="rainSound">
+  <source src="https://www.soundjay.com/nature/rain-01.mp3" type="audio/mpeg">
 </audio>
 
 <script>
@@ -169,41 +239,97 @@ let i = 0, musicPlayed = false;
 
 function next() {
   if (!musicPlayed) {
-    const m=document.getElementById("music");
-    m.volume=0.4;
-    m.play();
+    document.getElementById("music").play();
     musicPlayed = true;
   }
 
   if (i === 4) document.getElementById("gallery").classList.remove("hidden");
 
-  if (i < messages.length) {
-    document.getElementById("text").innerText = messages[i++];
+  if (i < messages.length - 1) {
+    document.getElementById("text").innerText = messages[i];
+    i++;
   } else {
+    document.getElementById("text").innerText = messages[i];
     document.getElementById("nextBtn").classList.add("hidden");
     document.getElementById("finalBtns").classList.remove("hidden");
   }
 }
 
 function valYes() {
-  showFinal("So it’s a date 😍❤️<br><br>We are going to have the BEST for us 😌🔥");
+  document.getElementById("heartbeat").play();
+  typeFinal("So it’s a date 😍❤️\n\nMy heart is beating just for you 💓");
 }
 
 function valOnly() {
-  showFinal("I know you clicked ‘Only if you take me for sushi’ 😏🍣<br><br>SO we are going to have the best for US… THE BESTTT 💕🔥");
+  document.getElementById("rainSound").play();
+  document.body.classList.add("flash");
+
+  for (let i = 0; i < 80; i++) {
+    const drop = document.createElement("div");
+    drop.className = "rain";
+    drop.style.left = Math.random() * 100 + "vw";
+    drop.style.animationDuration = (0.5 + Math.random()) + "s";
+    document.body.appendChild(drop);
+  }
+
+  typeFinal("I know you clicked Only if sushi 😏🍣\n\nSo we are going to have THE BESTTT for us 💕🔥");
 }
 
-function showFinal(msg) {
-  document.getElementById("hiddenMsg").innerHTML =
-    "<h1>"+msg+"</h1><button onclick='reply()'>Reply to me 💬</button>";
-  document.getElementById("hiddenMsg").classList.remove("hidden");
+function typeFinal(text) {
+  document.getElementById("finalBtns").classList.add("hidden");
+  document.getElementById("text").classList.add("hidden");
+  document.getElementById("gallery").classList.add("hidden");
+
+  const box = document.getElementById("hiddenMsg");
+  box.classList.remove("hidden");
+  box.innerHTML = "<h1 id='typeBox'></h1><br><button onclick='reply()'>Reply to me 💬</button>";
+
+  let idx = 0;
+  const interval = setInterval(() => {
+    document.getElementById("typeBox").innerText += text[idx];
+    idx++;
+    if (idx >= text.length) clearInterval(interval);
+  }, 50);
 }
 
 function reply() {
   window.open("https://wa.me/919727257013", "_blank");
 }
+
+function flip(card, n) {
+  const msgs = {
+    1: "This smile still makes my heart skip 💖",
+    2: "Our cutest memory ever 🥺",
+    3: "My favorite face 😌",
+    4: "This hug = home 🤍",
+    5: "Every moment with you is magic ✨",
+    6: "Forever us 💕"
+  };
+
+  card.classList.toggle("flip");
+  card.querySelector(".photo-back").innerText = msgs[n];
+
+  for (let i = 0; i < 8; i++) {
+    const s = document.createElement("div");
+    s.className = "sparkle";
+    s.style.left = Math.random() * 80 + "%";
+    s.style.top = Math.random() * 80 + "%";
+    card.appendChild(s);
+    setTimeout(() => s.remove(), 1000);
+  }
+}
+
+/* Floating hearts */
+setInterval(() => {
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "❤️";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.fontSize = (15 + Math.random() * 20) + "px";
+  document.body.appendChild(heart);
+  setTimeout(() => heart.remove(), 6000);
+}, 300);
 </script>
 
 </body>
 </html>
-

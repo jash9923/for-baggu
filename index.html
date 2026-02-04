@@ -20,9 +20,10 @@ body {
 
 .card {
   background: rgba(255,255,255,0.15);
-  padding: 35px 25px;
+  padding: 30px 20px;
   border-radius: 25px;
-  max-width: 360px;
+  max-width: 380px;
+  width: 90%;
   box-shadow: 0 15px 40px rgba(0,0,0,0.25);
   z-index: 2;
 }
@@ -33,7 +34,7 @@ h1 {
 }
 
 button {
-  margin-top: 20px;
+  margin-top: 15px;
   padding: 12px 22px;
   border-radius: 30px;
   border: none;
@@ -48,20 +49,35 @@ button:hover { transform: scale(1.05); }
 
 .hidden { display: none; }
 
-/* Gallery */
+/* GALLERY */
 .gallery {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
   margin-top: 15px;
 }
 
-.gallery img {
-  width: 90px;
-  height: 110px;
+.pic {
+  width: 100%;
+  height: 150px;
   object-fit: cover;
-  border-radius: 12px;
-  margin: 5px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-  animation: pop 0.6s ease;
+  border-radius: 16px;
+  box-shadow: 0 8px 18px rgba(0,0,0,0.35);
+  animation: fadeIn 0.8s ease forwards;
+  opacity: 0;
+}
 
+.pic:nth-child(1){animation-delay:0.1s;}
+.pic:nth-child(2){animation-delay:0.3s;}
+.pic:nth-child(3){animation-delay:0.5s;}
+.pic:nth-child(4){animation-delay:0.7s;}
+.pic:nth-child(5){animation-delay:0.9s;}
+.pic:nth-child(6){animation-delay:1.1s;}
+
+@keyframes fadeIn {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
 
 /* Hearts */
 .heart {
@@ -85,17 +101,15 @@ button:hover { transform: scale(1.05); }
 
   <h1 id="text">Hey Bagguu 👀</h1>
 
-  <!-- Gallery -->
   <div id="gallery" class="hidden">
-    <img src="https://raw.githubusercontent.com/jash9923/for-baggu/main/WhatsApp%20Image%202026-02-04%20at%202.19.39%20PM%20(1).jpeg">
-    <img src="https://raw.githubusercontent.com/jash9923/for-baggu/main/WhatsApp%20Image%202026-02-04%20at%202.19.39%20PM%20(2).jpeg">
-    <img src="https://raw.githubusercontent.com/jash9923/for-baggu/main/WhatsApp%20Image%202026-02-04%20at%202.19.39%20PM.jpeg">
-    <img src="https://raw.githubusercontent.com/jash9923/for-baggu/main/WhatsApp%20Image%202026-02-04%20at%202.19.40%20PM%20(1).jpeg">
-    <img src="https://raw.githubusercontent.com/jash9923/for-baggu/main/WhatsApp%20Image%202026-02-04%20at%202.19.40%20PM%20(2).jpeg">
-    <img src="https://raw.githubusercontent.com/jash9923/for-baggu/main/WhatsApp%20Image%202026-02-04%20at%202.19.40%20PM.jpeg">
+    <img class="pic" src="https://raw.githubusercontent.com/jash9923/for-baggu/main/WhatsApp%20Image%202026-02-04%20at%202.19.39%20PM%20(1).jpeg">
+    <img class="pic" src="https://raw.githubusercontent.com/jash9923/for-baggu/main/WhatsApp%20Image%202026-02-04%20at%202.19.39%20PM%20(2).jpeg">
+    <img class="pic" src="https://raw.githubusercontent.com/jash9923/for-baggu/main/WhatsApp%20Image%202026-02-04%20at%202.19.39%20PM.jpeg">
+    <img class="pic" src="https://raw.githubusercontent.com/jash9923/for-baggu/main/WhatsApp%20Image%202026-02-04%20at%202.19.40%20PM%20(1).jpeg">
+    <img class="pic" src="https://raw.githubusercontent.com/jash9923/for-baggu/main/WhatsApp%20Image%202026-02-04%20at%202.19.40%20PM%20(2).jpeg">
+    <img class="pic" src="https://raw.githubusercontent.com/jash9923/for-baggu/main/WhatsApp%20Image%202026-02-04%20at%202.19.40%20PM.jpeg">
   </div>
 
-  <!-- Valentine Question -->
   <div id="valentineBox" class="hidden">
     <h1>You are my Valentine 💘</h1>
     <button onclick="valYes()">Hell Yess 😍</button>
@@ -174,3 +188,4 @@ setInterval(() => {
 
 </body>
 </html>
+

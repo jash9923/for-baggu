@@ -23,8 +23,14 @@ body {
   padding: 35px 25px;
   border-radius: 25px;
   max-width: 350px;
-  box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+  box-shadow: 0 0 25px rgba(255,255,255,0.4);
+  animation: glow 3s infinite alternate;
   z-index: 2;
+}
+
+@keyframes glow {
+  from { box-shadow: 0 0 15px rgba(255,255,255,0.3); }
+  to { box-shadow: 0 0 35px rgba(255,255,255,0.7); }
 }
 
 h1 {
@@ -45,7 +51,7 @@ button {
 }
 
 button:hover {
-  transform: scale(1.05);
+  transform: scale(1.1);
 }
 
 .hidden { display: none; }
@@ -74,7 +80,6 @@ button:hover {
 .heart {
   position: absolute;
   bottom: -20px;
-  color: rgba(255,255,255,0.8);
   font-size: 20px;
   animation: float 6s linear infinite;
 }
@@ -82,6 +87,18 @@ button:hover {
 @keyframes float {
   0% { transform: translateY(0); opacity: 1; }
   100% { transform: translateY(-100vh); opacity: 0; }
+}
+
+/* Sparkles */
+.sparkle {
+  position: absolute;
+  font-size: 18px;
+  animation: sparkle 1.5s ease-out forwards;
+}
+
+@keyframes sparkle {
+  from { transform: scale(0) translateY(0); opacity: 1; }
+  to { transform: scale(1.5) translateY(-80px); opacity: 0; }
 }
 </style>
 </head>
@@ -133,13 +150,10 @@ function next() {
     musicPlayed = true;
   }
 
-  if (i === 4) {
-    document.getElementById("gallery").classList.remove("hidden");
-  }
+  if (i === 4) document.getElementById("gallery").classList.remove("hidden");
 
   if (i < messages.length - 1) {
-    document.getElementById("text").innerText = messages[i];
-    i++;
+    document.getElementById("text").innerText = messages[i++];
   } else {
     document.getElementById("text").innerText = messages[i];
     document.getElementById("nextBtn").classList.add("hidden");
@@ -148,10 +162,12 @@ function next() {
 }
 
 function valYes() {
+  sparkleBurst();
   showFinal("So it’s a date 😍❤️<br><br>We are going to have the BEST for us 😌🔥");
 }
 
 function valOnly() {
+  sparkleBurst();
   showFinal("I know you clicked ‘Only if you take me to get best sushi & good food’ 😏🍣<br><br>SO we are going to have the best for US… THE BESTTT 💕🔥");
 }
 
@@ -161,14 +177,26 @@ function showFinal(msg) {
   document.getElementById("gallery").classList.add("hidden");
 
   document.getElementById("hiddenMsg").innerHTML =
-    "<h1>" + msg +
-    "<br><br><button onclick='reply()'>Reply to me 💬</button></h1>";
+    "<h1>" + msg + "<br><br><button onclick='reply()'>Reply to me 💬</button></h1>";
 
   document.getElementById("hiddenMsg").classList.remove("hidden");
 }
 
 function reply() {
   window.open("https://wa.me/919727257013", "_blank");
+}
+
+/* Sparkle burst */
+function sparkleBurst() {
+  for (let i = 0; i < 20; i++) {
+    const s = document.createElement("div");
+    s.className = "sparkle";
+    s.innerHTML = "✨";
+    s.style.left = Math.random() * 100 + "vw";
+    s.style.top = Math.random() * 100 + "vh";
+    document.body.appendChild(s);
+    setTimeout(() => s.remove(), 1500);
+  }
 }
 
 /* Floating hearts */
@@ -185,3 +213,4 @@ setInterval(() => {
 
 </body>
 </html>
+

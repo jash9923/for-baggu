@@ -116,7 +116,8 @@ button:hover {
       Always yours,<br>
 Ishani 💕<br><br>
 Get ready, hot, for the dinner…<br>
-and for me too 😉🔥
+and for me too 😉🔥<br><br>
+<button onclick="reply()">Reply to me 💬</button>
     </h1>
   </div>
 </div>
@@ -164,7 +165,9 @@ function yes() {
   document.getElementById("gallery").classList.add("hidden");
   document.getElementById("hiddenMsg").classList.remove("hidden");
 }
-
+function reply() {
+  window.open("https://wa.me/919727257013", "_blank");
+}
 /* Floating hearts */
 setInterval(() => {
   const heart = document.createElement("div");

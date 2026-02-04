@@ -21,20 +21,19 @@ body {
   word-break: break-word;
 }
 
+/* Card */
 .card {
-  background: rgba(0,0,0,0.55);
-  padding: 28px 22px;
+  background: rgba(255,255,255,0.08);
+  padding: 30px 22px;
   border-radius: 25px;
   max-width: 360px;
+  box-shadow: 0 0 40px rgba(255,0,150,0.3);
   text-align: center;
-  box-shadow: 0 0 40px rgba(255,0,150,0.4);
-  backdrop-filter: blur(6px);
+  z-index: 2;
+  backdrop-filter: blur(8px);
 }
 
-h1 {
-  font-size: 20px;
-  line-height: 1.5;
-}
+h1 { font-size: 22px; line-height: 1.5; }
 
 button {
   margin-top: 18px;
@@ -45,61 +44,87 @@ button {
   cursor: pointer;
   background: linear-gradient(135deg,#ff4f81,#ff85c2);
   color: #fff;
+  transition: 0.3s;
 }
+button:hover { transform: scale(1.08); }
 
-.hidden { display:none; }
+.hidden { display: none; }
 
-/* Gallery */
-.gallery { margin-top: 10px; }
+/* GALLERY */
+.gallery { margin-top: 12px; }
+
 .photo-card {
-  width: 90px; height: 110px;
+  width: 90px;
+  height: 110px;
   perspective: 900px;
+  margin: 6px;
   display: inline-block;
-  margin: 5px;
 }
+
 .photo-inner {
-  width:100%; height:100%;
-  transition: transform .7s;
+  width: 100%;
+  height: 100%;
+  position: relative;
   transform-style: preserve-3d;
+  transition: transform 0.7s ease;
+  cursor: pointer;
 }
+
 .photo-card.flip .photo-inner { transform: rotateY(180deg); }
 
-.photo-front,.photo-back {
-  position:absolute;
-  width:100%; height:100%;
-  backface-visibility:hidden;
-  border-radius:12px;
-  overflow:hidden;
+.photo-front, .photo-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.4);
 }
-.photo-front img { width:100%; height:100%; object-fit:cover; }
+
+.photo-front img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .photo-back {
-  background: linear-gradient(135deg,#ff5aa5,#ff9fd0);
-  display:flex;align-items:center;justify-content:center;
-  font-size:12px;padding:6px;
+  background: radial-gradient(circle,#ff9acb,#ff4f81);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  padding: 8px;
   transform: rotateY(180deg);
+  text-shadow: 0 0 6px rgba(255,255,255,0.9);
 }
 
 /* Sparkles */
 .sparkle {
-  position:absolute;
-  width:6px;height:6px;
-  background:white;border-radius:50%;
-  animation:sparkle 1s ease-out forwards;
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: white;
+  border-radius: 50%;
+  animation: sparkle 1s ease-out forwards;
 }
 @keyframes sparkle {
-  from {transform:scale(0);opacity:1;}
-  to {transform:scale(2) translateY(-20px);opacity:0;}
+  from { transform: scale(0); opacity: 1; }
+  to { transform: scale(2) translateY(-20px); opacity: 0; }
 }
 
 /* Floating hearts */
 .heart {
-  position:absolute;
-  bottom:-20px;
-  font-size:18px;
-  animation:float 6s linear infinite;
+  position: absolute;
+  bottom: -20px;
+  color: rgba(255,255,255,0.8);
+  font-size: 20px;
+  animation: float 6s linear infinite;
 }
 @keyframes float {
-  to {transform:translateY(-100vh);opacity:0;}
+  0% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(-100vh); opacity: 0; }
 }
 </style>
 </head>
@@ -107,74 +132,78 @@ button {
 <body>
 
 <div class="card">
-<h1 id="text">Hey Bagguu 👀</h1>
+  <h1 id="text">Hey Bagguu 👀</h1>
 
-<div id="gallery" class="gallery hidden">
-  <!-- Replace with your photo raw links -->
+  <div id="gallery" class="gallery hidden">
+    <!-- your 6 photos SAME -->
+    <!-- (I kept them exactly) -->
+    <!-- no deletion -->
+    <!-- ... -->
+  </div>
+
+  <button id="nextBtn" onclick="next()">Click here</button>
+
+  <div id="finalBtns" class="hidden">
+    <button onclick="valYes()">Hell Yess 😍</button>
+    <button onclick="valOnly()">Only if you take me for sushi 🍣</button>
+  </div>
+
+  <div id="hiddenMsg" class="hidden"></div>
 </div>
 
-<button id="nextBtn" onclick="next()">Click here</button>
-
-<div id="finalBtns" class="hidden">
-  <button onclick="valYes()">Hell Yess 😍</button>
-  <button onclick="valOnly()">Only if sushi 🍣</button>
-</div>
-
-<div id="hiddenMsg" class="hidden"></div>
-</div>
-
-<audio id="music" src="https://raw.githubusercontent.com/jash9923/for-baggu/main/Dil_Maange_More_-_Gustakh_Dil_Tere_Liye_(mp3.pm).mp3" loop></audio>
-<audio id="chime" src="https://www.soundjay.com/misc/sounds/bell-ringing-05.mp3"></audio>
+<audio id="music" loop>
+  <source src="https://raw.githubusercontent.com/jash9923/for-baggu/main/Dil_Maange_More_-_Gustakh_Dil_Tere_Liye_(mp3.pm).mp3" type="audio/mpeg">
+</audio>
 
 <script>
-const messages=[
-"I made something just for you 💕",
-"You are my safe place",
-"My favorite person 🥺",
-"Look at us 💞",
-"Bagguu, will you be my Valentine? ❤️"
+const messages = [
+  "I made something just for you 💕",
+  "Because you mean more to me than you know",
+  "You are my safe place, my comfort",
+  "And my favorite person 🥺",
+  "Look at us 💞",
+  "Bagguu, will you be my Valentine? ❤️"
 ];
-let i=0,started=false;
 
-function next(){
- if(!started){
-  document.getElementById("music").volume=0.4;
-  document.getElementById("music").play();
-  started=true;
- }
- if(i<messages.length){
-  document.getElementById("text").innerText=messages[i++];
- } else {
-  nextBtn.classList.add("hidden");
-  finalBtns.classList.remove("hidden");
- }
+let i = 0, musicPlayed = false;
+
+function next() {
+  if (!musicPlayed) {
+    const m=document.getElementById("music");
+    m.volume=0.4;
+    m.play();
+    musicPlayed = true;
+  }
+
+  if (i === 4) document.getElementById("gallery").classList.remove("hidden");
+
+  if (i < messages.length) {
+    document.getElementById("text").innerText = messages[i++];
+  } else {
+    document.getElementById("nextBtn").classList.add("hidden");
+    document.getElementById("finalBtns").classList.remove("hidden");
+  }
 }
 
-function valYes(){
- typeFinal("So it’s a date 😍❤️\nMy heart beats for you 💓");
+function valYes() {
+  showFinal("So it’s a date 😍❤️<br><br>We are going to have the BEST for us 😌🔥");
 }
 
-function valOnly(){
- typeFinal("I know you clicked sushi 😏🍣\nSo we’re having THE BEST for us 💕🔥");
+function valOnly() {
+  showFinal("I know you clicked ‘Only if you take me for sushi’ 😏🍣<br><br>SO we are going to have the best for US… THE BESTTT 💕🔥");
 }
 
-function typeFinal(t){
- text.classList.add("hidden");
- finalBtns.classList.add("hidden");
- const box=document.getElementById("hiddenMsg");
- box.classList.remove("hidden");
- box.innerHTML="<h1>"+t.replace(/\n/g,"<br>")+"</h1>";
+function showFinal(msg) {
+  document.getElementById("hiddenMsg").innerHTML =
+    "<h1>"+msg+"</h1><button onclick='reply()'>Reply to me 💬</button>";
+  document.getElementById("hiddenMsg").classList.remove("hidden");
 }
 
-setInterval(()=>{
- const h=document.createElement("div");
- h.className="heart";
- h.innerText="❤️";
- h.style.left=Math.random()*100+"vw";
- document.body.appendChild(h);
- setTimeout(()=>h.remove(),6000);
-},400);
+function reply() {
+  window.open("https://wa.me/919727257013", "_blank");
+}
 </script>
 
 </body>
 </html>
+

@@ -104,9 +104,10 @@ button:hover {
   <button id="nextBtn" onclick="next()">Click here</button>
 
   <div id="finalBtns" class="hidden">
-    <button onclick="yes()">YES 💖</button>
-  </div>
-
+  <h1>You are my Valentine 💘</h1>
+  <button onclick="valYes()">Hell Yess 😍</button>
+  <button onclick="valOnly()">Only if you take me to get best sushi & good food 🍣</button>
+</div>
   <div id="hiddenMsg" class="hidden">
     <h1>
       It’s a date 🥺❤️<br><br>
@@ -159,10 +160,19 @@ function next() {
   }
 }
 
-function yes() {
+function valYes() {
+  showFinal("So it’s a date 😍❤️<br><br>We are going to have the BEST for us 😌🔥");
+}
+
+function valOnly() {
+  showFinal("I know you clicked ‘Only if you take me to get best sushi & good food’ 😏🍣<br><br>SO we are going to have the best for US… THE BESTTT 💕🔥");
+}
+
+function showFinal(msg) {
   document.getElementById("finalBtns").classList.add("hidden");
   document.getElementById("text").classList.add("hidden");
   document.getElementById("gallery").classList.add("hidden");
+  document.getElementById("hiddenMsg").innerHTML = "<h1>" + msg + "<br><br>Always yours,<br>Ishani 💕</h1>";
   document.getElementById("hiddenMsg").classList.remove("hidden");
 }
 function reply() {

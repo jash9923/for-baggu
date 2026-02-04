@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For My Bagguu ❤️</title>
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  background: linear-gradient(135deg, #ff758c, #ff7eb3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Segoe UI', sans-serif;
+  overflow: hidden;
+  color: #fff;
+  text-align: center;
+}
+
+.card {
+  background: rgba(255,255,255,0.15);
+  padding: 40px 30px;
+  border-radius: 25px;
+  max-width: 330px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+  z-index: 2;
+}
+
+h1 {
+  font-size: 24px;
+  line-height: 1.4;
+}
+
+button {
+  margin-top: 25px;
+  padding: 12px 26px;
+  border-radius: 30px;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  background: #fff;
+  color: #ff4f81;
+  transition: 0.3s;
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+
+.hidden {
+  display: none;
+}
+
+/* Hearts */
+.heart {
+  position: absolute;
+  bottom: -20px;
+  color: rgba(255,255,255,0.8);
+  font-size: 20px;
+  animation: float 6s linear infinite;
+}
+
+@keyframes float {
+  0% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(-100vh); opacity: 0; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <h1 id="text">Hey Bagguu 👀</h1>
+
+  <button id="nextBtn" onclick="next()">Click here</button>
+
+  <div id="finalBtns" class="hidden">
+    <button onclick="yes()">YES 💖</button>
+  </div>
+
+  <div id="hiddenMsg" class="hidden">
+    <h1>
+      It’s a date 🥺❤️<br><br>
+      our date is ..<br>
+      for the best sushi 🍣<br>
+      and best of me 💫<br><br>
+      Always yours,<br>
+      Ishani 💕
+    </h1>
+  </div>
+</div>
+
+<audio id="music">
+  <source src="https://pagalworld.com.se/files/download/id/6470" type="audio/mpeg">
+</audio>
+
+<script>
+const messages = [
+  "I made something just for you 💕",
+  "Because you mean more to me than you know",
+  "You are my safe place, my comfort",
+  "And my favorite person 🥺",
+  "Bagguu, will you be my Valentine? ❤️"
+];
+
+let i = 0;
+let musicPlayed = false;
+
+function next() {
+  if (!musicPlayed) {
+    document.getElementById("music").play();
+    musicPlayed = true;
+  }
+
+  if (i < messages.length - 1) {
+    document.getElementById("text").innerText = messages[i];
+    i++;
+  } else {
+    document.getElementById("text").innerText = messages[i];
+    document.getElementById("nextBtn").classList.add("hidden");
+    document.getElementById("finalBtns").classList.remove("hidden");
+  }
+}
+
+function yes() {
+  document.getElementById("finalBtns").classList.add("hidden");
+  document.getElementById("text").classList.add("hidden");
+  document.getElementById("hiddenMsg").classList.remove("hidden");
+}
+
+// Floating hearts
+setInterval(() => {
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "❤️";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.fontSize = (15 + Math.random() * 20) + "px";
+  document.body.appendChild(heart);
+  setTimeout(() => heart.remove(), 6000);
+}, 300);
+</script>
+
+</body>
+</html>
